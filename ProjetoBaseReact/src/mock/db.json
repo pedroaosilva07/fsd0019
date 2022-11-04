@@ -1,0 +1,19 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "usuario": "Zanatta",
+      "senha": "Fleek"
+    },
+    {
+      "id": 2,
+      "usuario": "Frank",
+      "senha": "Cursos"
+    },
+    {
+      "id": 3,
+      "usuario": "Pedro",
+      "senha": "awxsvwddhadkfj123#2022a"
+    }
+  ]
+}

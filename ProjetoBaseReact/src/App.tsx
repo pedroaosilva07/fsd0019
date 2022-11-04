@@ -4,6 +4,8 @@ import { GlobalStateInterface } from './Interfaces/InterfacesGerais';
 import Footer from './Layout/Footer';
 import Header from './Layout/Header';
 
+export const globalContexto = React.createContext({})
+
 export default function App() {
 
   const [globalState, setGlobalState] = useState<GlobalStateInterface>({
@@ -22,9 +24,16 @@ export default function App() {
 
   return (
     <>
-      <Header globalState={globalState} />
-      <Outlet />
-      <Footer />
+      <globalContexto.Provider value={{
+        globalSate: globalState,
+        setGlobalState: setGlobalState
+      }}>
+        <Header globalState={globalState} />
+        <p>Antes do Outlet</p>
+        <Outlet />
+        <p>Depois do Outlet</p>
+        <Footer globalState={globalState} />
+      </globalContexto.Provider>
     </>
   );
 
