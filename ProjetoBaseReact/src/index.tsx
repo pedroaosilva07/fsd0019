@@ -4,15 +4,18 @@ import reportWebVitals from './reportWebVitals';
 
 import { RouterProvider } from 'react-router-dom'
 import { router } from './Router/Router';
+import Essencial from './Essencial';
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+// <RouterProvider router={router} />
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Essencial></Essencial>
   </React.StrictMode>
 );
 
