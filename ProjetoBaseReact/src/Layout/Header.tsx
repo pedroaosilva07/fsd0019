@@ -1,10 +1,17 @@
-import React from 'react';
-import { GlobalStateInterface } from '../Interfaces/InterfacesGerais';
+import React, { useContext } from 'react';
+import { ContextoGlobal } from '../Contextos/ContextoGlobal';
+import useGlobalState from '../States/GlobalState';
 
-export default function Header(props: { globalState: GlobalStateInterface }) {
+export default function Header() {
+
+  const globalContext = useContext(ContextoGlobal)
+
+  // const { globalState, setGlobalState } = useGlobalState()
 
   return (
-    <><h1>Conteúdo do Header: {props.globalState.layOut.tituloBarra}</h1></>
+    <>
+      <h1>Header.tsx - Campo Nome do LoginState {globalContext.globalState.loginState.nome}</h1>
+    </>
   );
 
 }
