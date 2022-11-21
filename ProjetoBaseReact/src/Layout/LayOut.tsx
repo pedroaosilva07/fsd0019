@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { Outlet } from 'react-router-dom';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
 import useLayoutState from '../GlobalStates/LayoutState';
 import useLoginState from '../GlobalStates/LoginState';
+import Login from '../Login/Login';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -19,9 +21,21 @@ export default function LayOut() {
         layoutState: layoutState,
         setLayoutState: setLayoutState
       }}>
-        <Header />
-        <Outlet />
-        <Footer />
+
+        <>
+          {loginState.logado ?
+            <>
+              <Header />
+              <Outlet />
+              <Footer />
+            </> :
+            <>
+              <Login />
+            </>
+          }
+
+        </>
+
       </ContextoGlobal.Provider>
     </>
   );

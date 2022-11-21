@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ContextoGlobal, ContextoGlobalInterface } from '../Contextos/ContextoGlobal';
 
 import './Login.css'
 
 interface LoginInterface {
   usuario: string
   senha: string
+  token: string
 }
 
 const URL_SERVIDOR = 'http://localhost:3002'
@@ -12,8 +14,10 @@ const URL_SERVIDOR = 'http://localhost:3002'
 export default function Login() {
 
   const [login, setLogin] = useState<LoginInterface>({
-    usuario: '', senha: ''
+    usuario: '', senha: '', token: ''
   })
+
+  const setLoginState = (useContext(ContextoGlobal) as ContextoGlobalInterface).setLoginState
 
   const logar = () => {
 
@@ -24,15 +28,23 @@ export default function Login() {
     urlPesquisa = urlPesquisa.concat('&senha=')
     urlPesquisa = urlPesquisa.concat(login.senha)
 
-    console.log(urlPesquisa)
+    // console.log(urlPesquisa)
 
     setTimeout(() => {
 
       fetch(urlPesquisa).then(rs => {
         return rs.json()
       }).then((rs: Array<LoginInterface>) => {
+
         if (rs.length > 0) {
           console.log('Usuário Encontrado - Login OK')
+
+          setLoginState({
+            logado: true,
+            nome: rs[0].usuario,
+            token: rs[0].token
+          })
+
         } else {
           console.log('Usuário Não Encontrado')
         }
@@ -47,7 +59,7 @@ export default function Login() {
   return (
     <>
       <div className="borda">
-        <h1>Login.tsx2</h1>
+        <h1>Login.tsx</h1>
 
         <input type="text" placeholder='Login:' id="txtLogin"
           onChange={(e) => setLogin({ ...login, usuario: e.target.value })}

@@ -3,17 +3,20 @@
     {
       "id": 1,
       "usuario": "Zanatta",
-      "senha": "Fleek"
+      "senha": "Fleek",
+      "token": "alsdjfaklsdfjakslj"      
     },
     {
       "id": 2,
       "usuario": "Frank",
-      "senha": "Cursos"
+      "senha": "Cursos",
+      "token": "jkdfjkdfjdkfjdkfjf"
     },
     {
       "id": 3,
       "usuario": "Pedro",
-      "senha": "awxsvwddhadkfj123#2022a"
+      "senha": "awxsvwddhadkfj123#2022a",
+      "token": "pppppopopopooo"
     }
   ]
 }

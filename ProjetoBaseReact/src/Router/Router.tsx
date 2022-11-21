@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <ErroNavegacao />
+    element: <Login />
   }
 
   /*

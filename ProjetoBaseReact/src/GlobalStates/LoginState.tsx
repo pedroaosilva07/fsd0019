@@ -10,7 +10,7 @@ export default function useLoginState() {
 
   const [loginState, setLoginState] = useState<LoginStateInterface>({
     logado: false,
-    nome: '',
+    nome: 'Nome Antes do Login',
     token: ''
   })
 
