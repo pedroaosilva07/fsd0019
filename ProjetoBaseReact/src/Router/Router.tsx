@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { createBrowserRouter } from 'react-router-dom';
+import Escola from '../Crud/Escola/Escola';
 import ErroAplicacao from '../Layout/ErroAplicacao';
-import ErroNavegacao from '../Layout/ErroNavegacao';
 import LayOut from '../Layout/LayOut';
 import Login from '../Login/Login';
 
@@ -12,8 +12,8 @@ export const router = createBrowserRouter([
     element: <LayOut />,
     errorElement: <ErroAplicacao />,
     children: [{
-      path: "/login",
-      element: <Login />,
+      path: "escola",
+      element: <Escola />,
       errorElement: <ErroAplicacao />
     }]
   },

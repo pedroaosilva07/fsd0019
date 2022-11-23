@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { URL_SERVIDOR } from '../Config/Setup';
 import { ContextoGlobal, ContextoGlobalInterface } from '../Contextos/ContextoGlobal';
 
 import './Login.css'
@@ -8,8 +9,6 @@ interface LoginInterface {
   senha: string
   token: string
 }
-
-const URL_SERVIDOR = 'http://localhost:3002'
 
 export default function Login() {
 
@@ -37,7 +36,6 @@ export default function Login() {
       }).then((rs: Array<LoginInterface>) => {
 
         if (rs.length > 0) {
-          console.log('Usuário Encontrado - Login OK')
 
           setLoginState({
             logado: true,
