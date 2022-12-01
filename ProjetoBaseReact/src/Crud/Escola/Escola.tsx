@@ -19,6 +19,8 @@ export default function Escola() {
 
   const btIncluir = () => {
 
+    globalContext.setMensagemState({ exibir: true, mensagem: 'Incluindo Escola', tipo: 'processando' })
+
     setTimeout(() => {
       fetch(URL_SERVIDOR.concat('/escola'), {
         body: JSON.stringify(escola),
@@ -29,9 +31,14 @@ export default function Escola() {
       }).then(rs => {
         if (rs.status == 201) {
           setEscola({ nome: '', cnpj: '', email: '', idEscola: 0 })
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Escola Cadastrada com Sucesso', tipo: 'aviso' })
+        } else {
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Erro ao Incluir Escola!!!', tipo: 'erro' })
         }
+      }).catch(() => {
+        globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível incluir Escola!!!', tipo: 'erro' })
       })
-    }, 9000)
+    }, 2000)
 
   }
 
