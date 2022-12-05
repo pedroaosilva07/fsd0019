@@ -18,6 +18,10 @@ export default function LayOut() {
   const { layoutState, setLayoutState } = useLayoutState()
   const { mensagemState, setMensagemState } = useMensagemState()
 
+  const clearMessage = (): void => {
+    setMensagemState({ ...mensagemState, exibir: false })
+  }
+
   return (
     <>
       <ContextoGlobal.Provider value={{
@@ -26,7 +30,8 @@ export default function LayOut() {
         layoutState: layoutState,
         setLayoutState: setLayoutState,
         mensagemState: mensagemState,
-        setMensagemState: setMensagemState
+        setMensagemState: setMensagemState,
+        clearMessage: clearMessage
       }}>
         <>
           {loginState.logado ?

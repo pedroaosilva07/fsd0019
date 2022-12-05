@@ -9,7 +9,8 @@ export interface ContextoGlobalInterface {
   layoutState: LayoutStateInterface
   setLayoutState: React.Dispatch<React.SetStateAction<LayoutStateInterface>>
   mensagemState: MensagemStateInterface
-  setMensagemState: React.Dispatch<React.SetStateAction<MensagemStateInterface>>
+  setMensagemState: React.Dispatch<React.SetStateAction<MensagemStateInterface>>,
+  clearMessage: () => void
 }
 
 export const ContextoGlobal = createContext<ContextoGlobalInterface | null>(null)
