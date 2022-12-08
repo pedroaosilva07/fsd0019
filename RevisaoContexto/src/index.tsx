@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import LayOut from './componentes/LayOut';
 import reportWebVitals from './reportWebVitals';
 
 // import { RouterProvider } from 'react-router-dom'
@@ -12,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/*  <RouterProvider router={router} />  */}
-    <div>Revisão de Contexto</div>
+    <LayOut></LayOut>
   </React.StrictMode>
 );
 
