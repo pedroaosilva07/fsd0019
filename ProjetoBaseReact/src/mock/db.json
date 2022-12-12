@@ -1,214 +1,22 @@
 {
   "escola": [
     {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 1
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 2
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 3
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 4
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 5
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 6
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 7
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 8
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 9
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 10
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 11
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 12
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 13
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 14
-    },
-    {
-      "cnpj": "02014943000107",
-      "email": "fleek@fleekcursos.com.br",
-      "idEscola": 0,
-      "nome": "Fleek Cursos",
-      "id": 15
-    },
-    {
       "cnpj": "asdfasdf",
-      "email": "asfasdfasfd",
-      "idEscola": 0,
-      "nome": "asdfasfd",
-      "id": 16
+      "email": "asdfasd",
+      "idEscola": 1,
+      "nome": "asdfasf"
     },
     {
-      "nome": "asdfasdfasdf",
-      "cnpj": "asdfasdfasdf",
-      "email": "asdfasdfasfdf",
-      "idEscola": 0,
-      "id": 17
+      "cnpj": "asdfasfasd",
+      "email": "asdfasdfafsd",
+      "idEscola": 2,
+      "nome": "asdfasdfsdaf"
     },
     {
-      "nome": "asdfasdfadf",
-      "cnpj": "asdfasdf",
-      "email": "asdfasdfasfd",
-      "idEscola": 0,
-      "id": 18
-    },
-    {
-      "nome": "asdfasdfadf",
-      "cnpj": "asdfa asdf asdf",
-      "email": "asdfaa safda sfsfsdfasfd",
-      "idEscola": 0,
-      "id": 19
-    },
-    {
-      "nome": "Testse",
-      "cnpj": "asdfa asdf asdf",
-      "email": "asdfaa safda sfsfsdfasfd",
-      "idEscola": 0,
-      "id": 20
-    },
-    {
-      "nome": "",
-      "cnpj": "",
-      "email": "",
-      "idEscola": 0,
-      "id": 21
-    },
-    {
-      "cnpj": "asdfasdfasdf",
-      "email": "sdfasdfasdf",
-      "idEscola": 0,
-      "nome": "ddsfasfasdf",
-      "id": 22
-    },
-    {
-      "nome": "asdfasdf",
-      "cnpj": "asdfasdf",
-      "email": "asdfasdfsa",
-      "idEscola": 0,
-      "id": 23
-    },
-    {
-      "nome": "wrsadff",
-      "cnpj": "asdfasdfsadf",
-      "email": "asdfasdff",
-      "idEscola": 0,
-      "id": 24
-    },
-    {
-      "cnpj": "asfasdf",
-      "email": "asfasdf",
-      "idEscola": 0,
-      "nome": "asdfasdf",
-      "id": 25
-    },
-    {
-      "nome": "asfasdf",
-      "cnpj": "asdfasdf",
-      "email": "asdfasdfs",
-      "idEscola": 0,
-      "id": 26
-    },
-    {
-      "nome": "asasdf",
-      "cnpj": "asdfasdf",
-      "email": "asdfasdf",
-      "idEscola": 0,
-      "id": 27
-    },
-    {
-      "nome": "asdfasdfasdf",
-      "cnpj": "asdfasdfasdf",
-      "email": "asdfasdfasfd",
-      "idEscola": 0,
-      "id": 28
-    },
-    {
-      "nome": "asdfsadf",
-      "cnpj": "asdfasdfs",
-      "email": "asdfasdf",
-      "idEscola": 0,
-      "id": 29
-    },
-    {
-      "nome": "asfdasdf",
-      "cnpj": "asdfasdf",
-      "email": "asfasdf",
-      "idEscola": 0,
-      "id": 30
+      "cnpj": "234324324",
+      "email": "23423423",
+      "idEscola": 3,
+      "nome": "TTTTT"
     }
   ],
   "usuarios": [

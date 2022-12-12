@@ -6,6 +6,10 @@ import { URL_SERVIDOR } from '../../Config/Setup';
 
 import InputText from '../../Componentes/InputText';
 
+import './Escola.css'
+
+const TEMPO_REFRESH_TEMPORARIO = 1000
+
 interface LocalStateInterface {
   acao: 'incluindo' | 'excluindo' | 'pesquisando' | 'editando'
 }
@@ -31,7 +35,56 @@ export default function Escola() {
 
   const [pesquisa, setPesquisa] = useState<PesquisaInterface>({ nome: '' })
 
+  const btExcluir = (idEscola: number) => {
+
+  }
+
+  const btEditar = (idEscola: number) => {
+
+    globalContext.setMensagemState({ exibir: true, mensagem: 'Pesquisando Escola', tipo: 'processando' })
+
+    setTimeout(() => {
+
+      fetch(URL_SERVIDOR.concat('/escola/'.concat(idEscola.toString())), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'GET'
+      }).then(rs => {
+
+        // Primeiro Then do Fetch - Testo Status + Tratamento dos dados
+
+        if (rs.status == 200) {
+          globalContext.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
+
+          // Envio somente os dados para o próximo Then....
+          return rs.json()
+
+        } else {
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Erro ao Pesquisar Escola!!!', tipo: 'erro' })
+        }
+      }).then(rsEscola => {
+
+        setEscola(rsEscola)
+        setLocalState({ acao: 'editando' })
+
+      }).catch(() => {
+        globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível pesquisar Escola!!!', tipo: 'erro' })
+      })
+
+    }, TEMPO_REFRESH_TEMPORARIO)
+
+  }
+
   const btIncluir = () => {
+    setLocalState({ acao: 'incluindo' })
+  }
+
+  const btCancelar = () => {
+    setLocalState({ acao: 'pesquisando' })
+  }
+
+  const btConfirmarInclusao = () => {
 
     globalContext.setMensagemState({ exibir: true, mensagem: 'Incluindo Escola', tipo: 'processando' })
 
@@ -52,7 +105,7 @@ export default function Escola() {
       }).catch(() => {
         globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível incluir Escola!!!', tipo: 'erro' })
       })
-    }, 2000)
+    }, TEMPO_REFRESH_TEMPORARIO)
 
   }
 
@@ -83,13 +136,14 @@ export default function Escola() {
         }
       }).then(rsEscolas => {
 
+        // console.log(JSON.stringify(rsEscolas))
         setRsPesquisa(rsEscolas)
 
       }).catch(() => {
         globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível pesquisar Escola!!!', tipo: 'erro' })
       })
 
-    }, 2000)
+    }, TEMPO_REFRESH_TEMPORARIO)
 
   }
 
@@ -97,10 +151,13 @@ export default function Escola() {
     <>
       <h1>Cadastro de Escola</h1>
 
-      <>
-        <InputText label="Pesquisa" type="text" dados={pesquisa} field="nome" setState={setPesquisa} />
-        <input type="button" onClick={btPesquisar} value="Pesquisar" />
-      </>
+      {localState.acao == 'pesquisando' &&
+        <>
+          <InputText label="Pesquisa" type="text" dados={pesquisa} field="nome" setState={setPesquisa} />
+          <input type="button" onClick={btPesquisar} value="Pesquisar" />
+          <input type="button" onClick={btIncluir} value="Incluir" />
+        </>
+      }
 
 
       {localState.acao != 'pesquisando' &&
@@ -109,15 +166,52 @@ export default function Escola() {
           <InputText label="CNPJ" type="text" dados={escola} field="cnpj" setState={setEscola} />
           <InputText label="e-mail" type="text" dados={escola} field="email" setState={setEscola} />
         </>
+
       }
 
       {localState.acao == 'incluindo' &&
 
-        <input type="button" onClick={btIncluir} value="Incluir" />
+        <input type="button" onClick={btConfirmarInclusao} value="Confirmar Inclusão" />
 
       }
 
-      {JSON.stringify(rsPesquisa)}
+      {localState.acao != 'pesquisando' &&
+
+        <input type="button" onClick={btCancelar} value="Cancelar" />
+
+      }
+
+      {
+        localState.acao == 'pesquisando' &&
+
+        <table className='clsTableEscola'>
+          <thead>
+            <tr>
+              <td>Nome</td>
+              <td>CNPJ</td>
+              <td>e-mail</td>
+              <td>Ações</td>
+            </tr>
+          </thead>
+          <tbody>
+
+            {rsPesquisa.map((escola) =>
+              <tr key={escola.idEscola}>
+                <td>{escola.nome}</td>
+                <td>{escola.cnpj}</td>
+                <td>{escola.email}</td>
+                <td>
+                  <input type="button" value="Editar" onClick={() => btEditar(escola.idEscola)} />
+                  <input type="button" value="Excluir" onClick={() => btExcluir(escola.idEscola)} />
+                </td>
+              </tr>
+            )}
+
+          </tbody>
+
+        </table>
+
+      }
 
     </>
   );
