@@ -8,7 +8,7 @@ import InputText from '../../Componentes/InputText';
 
 import './Escola.css'
 
-const TEMPO_REFRESH_TEMPORARIO = 1000
+const TEMPO_REFRESH_TEMPORARIO = 500
 
 interface LocalStateInterface {
   acao: 'incluindo' | 'excluindo' | 'pesquisando' | 'editando'
@@ -35,11 +35,7 @@ export default function Escola() {
 
   const [pesquisa, setPesquisa] = useState<PesquisaInterface>({ nome: '' })
 
-  const btExcluir = (idEscola: number) => {
-
-  }
-
-  const btEditar = (idEscola: number) => {
+  const btEditar = (idEscola: number, acao: string) => {
 
     globalContext.setMensagemState({ exibir: true, mensagem: 'Pesquisando Escola', tipo: 'processando' })
 
@@ -66,7 +62,7 @@ export default function Escola() {
       }).then(rsEscola => {
 
         setEscola(rsEscola)
-        setLocalState({ acao: 'editando' })
+        setLocalState({ acao: acao })
 
       }).catch(() => {
         globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível pesquisar Escola!!!', tipo: 'erro' })
@@ -82,6 +78,74 @@ export default function Escola() {
 
   const btCancelar = () => {
     setLocalState({ acao: 'pesquisando' })
+  }
+
+  const btConfirmarExclusao = () => {
+    globalContext.setMensagemState({ exibir: true, mensagem: 'Excluindo os dados da Escola', tipo: 'processando' })
+
+    setTimeout(() => {
+
+      fetch(URL_SERVIDOR.concat('/escola/'.concat(escola.idEscola.toString())), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'DELETE'
+      }).then(rs => {
+
+        if (rs.ok) {
+
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Escola Excluída com Sucesso', tipo: 'aviso' })
+
+          setEscola({ nome: '', cnpj: '', email: '', idEscola: 0 })
+
+          setLocalState({ acao: 'pesquisando' })
+
+          btPesquisar()
+
+        } else {
+
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Erro ao Excluir Escola!!!', tipo: 'erro' })
+
+        }
+
+      }).catch(() => {
+
+        globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível Excluir Escola!!!', tipo: 'erro' })
+
+      })
+
+    }, TEMPO_REFRESH_TEMPORARIO)
+
+  }
+
+  const btConfirmarEdicao = () => {
+    globalContext.setMensagemState({ exibir: true, mensagem: 'Alterando os dados da Escola', tipo: 'processando' })
+
+    setTimeout(() => {
+      fetch(URL_SERVIDOR.concat('/escola/'.concat(escola.idEscola.toString())), {
+        body: JSON.stringify(escola),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'PUT'
+
+      }).then(rs => {
+        if (rs.ok) {
+
+          setEscola({ nome: '', cnpj: '', email: '', idEscola: 0 })
+
+          setLocalState({ acao: 'pesquisando' })
+
+          btPesquisar()
+
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Dados Alterados com Sucesso', tipo: 'aviso' })
+        } else {
+          globalContext.setMensagemState({ exibir: true, mensagem: 'Erro ao Alterar Escola!!!', tipo: 'erro' })
+        }
+      }).catch(() => {
+        globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível alterar Escola!!!', tipo: 'erro' })
+      })
+    }, TEMPO_REFRESH_TEMPORARIO)
   }
 
   const btConfirmarInclusao = () => {
@@ -115,7 +179,7 @@ export default function Escola() {
 
     setTimeout(() => {
 
-      fetch(URL_SERVIDOR.concat('/escola'), {
+      fetch(URL_SERVIDOR.concat('/escola?nome_like='.concat(pesquisa.nome)), {
         // body: JSON.stringify(escola),
         headers: {
           'Content-Type': 'application/json',
@@ -162,9 +226,9 @@ export default function Escola() {
 
       {localState.acao != 'pesquisando' &&
         <>
-          <InputText label="Nome" type="text" dados={escola} field="nome" setState={setEscola} />
-          <InputText label="CNPJ" type="text" dados={escola} field="cnpj" setState={setEscola} />
-          <InputText label="e-mail" type="text" dados={escola} field="email" setState={setEscola} />
+          <InputText label="Nome" type="text" dados={escola} field="nome" setState={setEscola} disabled={localState.acao == 'excluindo' ? true : false} />
+          <InputText label="CNPJ" type="text" dados={escola} field="cnpj" setState={setEscola} disabled={localState.acao == 'excluindo' ? true : false} />
+          <InputText label="e-mail" type="text" dados={escola} field="email" setState={setEscola} disabled={localState.acao == 'excluindo' ? true : false} />
         </>
 
       }
@@ -172,6 +236,18 @@ export default function Escola() {
       {localState.acao == 'incluindo' &&
 
         <input type="button" onClick={btConfirmarInclusao} value="Confirmar Inclusão" />
+
+      }
+
+      {localState.acao == 'editando' &&
+
+        <input type="button" onClick={btConfirmarEdicao} value="Confirmar Edição" />
+
+      }
+
+      {localState.acao == 'excluindo' &&
+
+        <input type="button" onClick={btConfirmarExclusao} value="Confirmar Exclusão" />
 
       }
 
@@ -195,17 +271,19 @@ export default function Escola() {
           </thead>
           <tbody>
 
-            {rsPesquisa.map((escola) =>
-              <tr key={escola.idEscola}>
-                <td>{escola.nome}</td>
-                <td>{escola.cnpj}</td>
-                <td>{escola.email}</td>
-                <td>
-                  <input type="button" value="Editar" onClick={() => btEditar(escola.idEscola)} />
-                  <input type="button" value="Excluir" onClick={() => btExcluir(escola.idEscola)} />
-                </td>
-              </tr>
-            )}
+            {
+              rsPesquisa.map((escola) =>
+                <tr key={escola.idEscola}>
+                  <td>{escola.nome}</td>
+                  <td>{escola.cnpj}</td>
+                  <td>{escola.email}</td>
+                  <td>
+                    <input type="button" value="Editar" onClick={() => btEditar(escola.idEscola, 'editando')} />
+                    <input type="button" value="Excluir" onClick={() => btEditar(escola.idEscola, 'excluindo')} />
+                  </td>
+                </tr>
+              )
+            }
 
           </tbody>
 
