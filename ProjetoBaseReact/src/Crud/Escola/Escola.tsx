@@ -9,6 +9,8 @@ import InputText from '../../Componentes/InputText';
 import './Escola.css'
 import ClsEscola from './ClsEscola';
 
+import Button from '@mui/material/Button';
+
 const TEMPO_REFRESH_TEMPORARIO = 500
 
 interface LocalStateInterface {
@@ -210,8 +212,8 @@ export default function Escola() {
       {localState.acao == 'pesquisando' &&
         <>
           <InputText label="Pesquisa" type="text" dados={pesquisa} field="nome" setState={setPesquisa} />
-          <input type="button" onClick={btPesquisar} value="Pesquisar" />
-          <input type="button" onClick={btIncluir} value="Incluir" />
+          <Button variant="contained" onClick={btPesquisar}>Pesquisar</Button>
+          <Button variant="contained" onClick={btIncluir}>Incluir</Button>
         </>
       }
 

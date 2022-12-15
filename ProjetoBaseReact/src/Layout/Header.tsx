@@ -8,7 +8,6 @@ export default function Header() {
 
   return (
     <>
-      <NavLink to="/escola">Cadastro de Escola</NavLink>
     </>
   );
 
