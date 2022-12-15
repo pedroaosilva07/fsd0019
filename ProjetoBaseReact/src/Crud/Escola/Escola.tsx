@@ -7,6 +7,7 @@ import { URL_SERVIDOR } from '../../Config/Setup';
 import InputText from '../../Componentes/InputText';
 
 import './Escola.css'
+import ClsEscola from './ClsEscola';
 
 const TEMPO_REFRESH_TEMPORARIO = 500
 
@@ -35,40 +36,31 @@ export default function Escola() {
 
   const [pesquisa, setPesquisa] = useState<PesquisaInterface>({ nome: '' })
 
+  const printTable = () =>
+    rsPesquisa.map((escola) =>
+      <tr key={escola.idEscola}>
+        <td>{escola.nome}</td>
+        <td>{escola.cnpj}</td>
+        <td>{escola.email}</td>
+        <td>
+          <input type="button" value="Editar" onClick={() => btEditar(escola.idEscola, 'editando')} />
+          <input type="button" value="Excluir" onClick={() => btEditar(escola.idEscola, 'excluindo')} />
+        </td>
+      </tr>
+    )
+
+
   const btEditar = (idEscola: number, acao: string) => {
 
-    globalContext.setMensagemState({ exibir: true, mensagem: 'Pesquisando Escola', tipo: 'processando' })
+    let clsEscola: ClsEscola = new ClsEscola()
 
-    setTimeout(() => {
-
-      fetch(URL_SERVIDOR.concat('/escola/'.concat(idEscola.toString())), {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'GET'
-      }).then(rs => {
-
-        // Primeiro Then do Fetch - Testo Status + Tratamento dos dados
-
-        if (rs.status == 200) {
-          globalContext.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
-
-          // Envio somente os dados para o próximo Then....
-          return rs.json()
-
-        } else {
-          globalContext.setMensagemState({ exibir: true, mensagem: 'Erro ao Pesquisar Escola!!!', tipo: 'erro' })
-        }
-      }).then(rsEscola => {
-
-        setEscola(rsEscola)
-        setLocalState({ acao: acao })
-
-      }).catch(() => {
-        globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível pesquisar Escola!!!', tipo: 'erro' })
-      })
-
-    }, TEMPO_REFRESH_TEMPORARIO)
+    clsEscola.btEditar<EscolaInterface>(
+      globalContext,
+      idEscola,
+      setEscola,
+      setLocalState,
+      acao
+    )
 
   }
 
@@ -272,17 +264,7 @@ export default function Escola() {
           <tbody>
 
             {
-              rsPesquisa.map((escola) =>
-                <tr key={escola.idEscola}>
-                  <td>{escola.nome}</td>
-                  <td>{escola.cnpj}</td>
-                  <td>{escola.email}</td>
-                  <td>
-                    <input type="button" value="Editar" onClick={() => btEditar(escola.idEscola, 'editando')} />
-                    <input type="button" value="Excluir" onClick={() => btEditar(escola.idEscola, 'excluindo')} />
-                  </td>
-                </tr>
-              )
+              printTable()
             }
 
           </tbody>
