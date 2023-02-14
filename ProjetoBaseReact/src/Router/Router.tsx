@@ -5,6 +5,7 @@ import Escola from '../Crud/Escola/Escola';
 import ErroAplicacao from '../Layout/ErroAplicacao';
 import LayOut from '../Layout/LayOut';
 import Login from '../Login/Login';
+import Aula from '../testes_apagar/Aula';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: <Login />
+  },
+  {
+    path: "/Aula",
+    element: <Aula />
   }
 
   /*
